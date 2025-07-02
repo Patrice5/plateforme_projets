@@ -11,9 +11,17 @@ class Database {
             return;
         }
 
+        $db = parse_url($url);
+        $host = $db["host"];
+        $port = $db["port"];
+        $user = $db["user"];
+        $pass = $db["pass"];
+        $dbname = ltrim($db["path"], "/");
+
+        $dsn = "pgsql:host=$host;port=$port;dbname=$dbname";
+
         try {
-            // Format attendu : postgresql://user:password@host:port/dbname
-            $this->pdo = new PDO($url);
+            $this->pdo = new PDO($dsn, $user, $pass);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
