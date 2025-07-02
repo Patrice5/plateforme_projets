@@ -6,6 +6,4 @@ services:
     dockerfilePath: ./Dockerfile
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: gestion_projets
-
+        value: postgresql://patrice:YefVBX6AhlYc6yQJ4p5EQ5LQ2yDSjgyg@dpg-d1ilthvfte5s739vrimg-a/gestion_projets
